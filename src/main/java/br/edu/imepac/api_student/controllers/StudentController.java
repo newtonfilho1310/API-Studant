@@ -10,42 +10,46 @@ import java.util.List;
 @RestController
 @RequestMapping("/students")
 public class StudentController {
-    private StudentService servicoAluno;
+    private StudentService studentService;
 
-    public StudentController(StudentService servicoAluno) {
-        this.servicoAluno = servicoAluno;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
+ 
     @PostMapping
-    public ResponseEntity<Student> cadastrar(@RequestBody Student aluno) {
-        Student alunoSalvo = servicoAluno.criar(aluno);
-        return ResponseEntity.ok(alunoSalvo);
+    public ResponseEntity<Student> cadastrar(@RequestBody Student student) {
+        Student studentSaved = studentService.create(student);
+        return ResponseEntity.ok(studentSaved);
     }
 
+   
     @GetMapping
     public ResponseEntity<List<Student>> listarTodos() {
-        List<Student> listaAlunos = servicoAluno.listarTodos();
-        return ResponseEntity.ok(listaAlunos);
+        List<Student> students = studentService.findAll();
+        return ResponseEntity.ok(students);
     }
 
+   
     @GetMapping("/{id}")
     public ResponseEntity<Student> buscarPorId(@PathVariable Long id) {
-        return servicoAluno.buscarPorId(id)
-                .map(aluno -> ResponseEntity.ok(aluno))
+        return studentService.findById(id)
+                .map(student -> ResponseEntity.ok(student))
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    
     @PutMapping("/{id}")
-    public ResponseEntity<Student> atualizar(@PathVariable Long id, @RequestBody Student aluno) {
-        Student alunoAtualizado = servicoAluno.atualizar(id, aluno);
-        return ResponseEntity.ok(alunoAtualizado);
+    public ResponseEntity<Student> atualizar(@PathVariable Long id, @RequestBody Student student) {
+        Student studentUpdated = studentService.update(id, student);
+        return ResponseEntity.ok(studentUpdated);
     }
 
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        servicoAluno.deletar(id);
+        studentService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
-
 

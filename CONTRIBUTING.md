@@ -1,6 +1,6 @@
 # 🤝 Contribuindo com o API Student
 
-Obrigado por querer contribuir com este projeto! Aqui estão as diretrizes para contribuição.
+Obrigado por querer contribuir com este projeto! Aqui estão as diretrizes para contribuição. Todas as contribuições são super bem-vindas, desde pequenos ajustes de texto até novas features!
 
 ## 📋 Como Contribuir
 

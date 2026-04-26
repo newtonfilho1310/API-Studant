@@ -2,6 +2,8 @@
 
 API RESTful para gerenciamento de estudantes, desenvolvida com **Spring Boot** e **Java**.
 
+> **Status:** Em desenvolvimento ativo 🚀
+
 ## 🚀 Tecnologias
 
 - Java 17+

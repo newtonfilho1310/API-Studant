@@ -1,6 +1,7 @@
 package br.edu.imepac.api_student.services;
 
 import br.edu.imepac.api_student.entities.Student;
+import br.edu.imepac.api_student.exceptions.StudentNotFoundException;
 import br.edu.imepac.api_student.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +17,21 @@ public class StudentService {
         this.repositorioAluno = repositorioAluno;
     }
 
-    public Student criar(Student aluno) {
+    public Student create(Student aluno) {
         return repositorioAluno.save(aluno);
     }
 
-    public List<Student> listarTodos() {
+    public List<Student> findAll() {
         return repositorioAluno.findAll();
     }
 
-    public Optional<Student> buscarPorId(Long id) {
+    public Optional<Student> findById(Long id) {
         return repositorioAluno.findById(id);
     }
 
-    public Student atualizar(Long id, Student dadosAluno) {
+    public Student update(Long id, Student dadosAluno) {
         Student aluno = repositorioAluno.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aluno nao encontrado com o id: " + id));
+                .orElseThrow(() -> new StudentNotFoundException(id));
 
         aluno.setNome(dadosAluno.getNome());
         aluno.setEmail(dadosAluno.getEmail());
@@ -38,9 +39,9 @@ public class StudentService {
         return repositorioAluno.save(aluno);
     }
 
-    public void deletar(Long id) {
+    public void delete(Long id) {
         Student aluno = repositorioAluno.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aluno nao encontrado com o id: " + id));
+                .orElseThrow(() -> new StudentNotFoundException(id));
 
         repositorioAluno.delete(aluno);
     }
